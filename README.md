@@ -1,0 +1,2 @@
+# ALG
+Practica de algoritmica
