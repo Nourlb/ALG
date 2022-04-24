@@ -1,0 +1,36 @@
+
+
+*******************************************************************************
+Sat Apr 23 23:43:15 2022
+
+
+FIT:    data read from 'salida_Ej1Obvio.dat'
+        format = z
+        #datapoints = 25
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a0 + a1*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a0            a1           
+   0 3.1527331977e+13   0.00e+00  7.94e+05    1.000000e+00   1.000000e+00
+  10 5.2520867058e-06  -6.85e-08  7.94e-05   -3.378313e-05   4.512081e-09
+
+After 10 iterations the fit converged.
+final sum of squares of residuals : 5.25209e-06
+rel. change during last iteration : -6.84937e-13
+
+degrees of freedom    (FIT_NDF)                        : 23
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000477861
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.28352e-07
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a0              = -3.37831e-05     +/- 0.000187     (553.5%)
+a1              = 4.51208e-09      +/- 1.665e-10    (3.69%)
+
+correlation matrix of the fit parameters:
+                a0     a1     
+a0              1.000 
+a1             -0.859  1.000 
