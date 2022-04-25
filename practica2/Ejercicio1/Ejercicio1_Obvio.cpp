@@ -56,14 +56,18 @@ int main(int argc, char * argv[])
 
 	int n = atoi(argv[1]);
 	double time_total = 0;
-	int m=2*n-1;
+	
+	srand(time(0));
+	
+   for (int i = 0; i < 15; i++){
+   	
+   	int m=2*n-1;
 
 	int * T = new int[n];
 	assert(T);
 	int * aux = new int[m];
 	assert(aux);
 
-	srand(time(0));
  
 	//genero todos los enteros entre -(n-1) y n-1
 	for (int j=0; j<m; j++) aux[j]=j-(n-1);
@@ -85,6 +89,9 @@ int main(int argc, char * argv[])
 	vector<int>::iterator it;
 
 	sort(myvector.begin(),myvector.end());
+	
+	delete [] aux;
+	delete [] T;
 
 	//for (it=myvector.begin(); it!=myvector.end(); ++it)
 	  // cout << " " << *it;
@@ -102,12 +109,17 @@ int main(int argc, char * argv[])
 	transcurrido = duration_cast<duration<double>>(tdepues - tantes);
 
 	time_total += transcurrido.count();
+	
+   }
+   
+        time_total /= 15;
+        
 	/*if (indice_buscado == -1) cout << "Elemento no encontrado" << endl;
 	else cout << "Indice: " << indice_buscado << " elemento:"<< myvector[indice_buscado]<< endl;*/
 
 	
 	cout << n << " " << time_total << endl;
   
-	delete [] aux;
+  return 0;
 
 }
