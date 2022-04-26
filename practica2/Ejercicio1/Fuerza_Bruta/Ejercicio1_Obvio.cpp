@@ -95,8 +95,10 @@ int main(int argc, char * argv[])
 
 	//for (it=myvector.begin(); it!=myvector.end(); ++it)
 	  // cout << " " << *it;
+	  
 	high_resolution_clock::time_point tantes, tdepues;
 	duration<double> transcurrido;
+	
 	int indice_buscado;
 
 	// Aplicamos la función buscaIgualIndice
@@ -110,13 +112,16 @@ int main(int argc, char * argv[])
 
 	time_total += transcurrido.count();
 	
+	
+	
    }
    
         time_total /= 15;
         
-	/*if (indice_buscado == -1) cout << "Elemento no encontrado" << endl;
-	else cout << "Indice: " << indice_buscado << " elemento:"<< myvector[indice_buscado]<< endl;*/
-
+        /*cout << endl;
+	if (indice_buscado == -1) cout << "Elemento no encontrado" << endl;
+	else cout << "Indice: " << indice_buscado << " elemento:"<< myvector[indice_buscado]<< endl;
+*/
 	
 	cout << n << " " << time_total << endl;
   

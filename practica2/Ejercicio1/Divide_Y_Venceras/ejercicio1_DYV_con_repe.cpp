@@ -28,23 +28,58 @@ double uniforme() //Genera un n�mero uniformemente distribuido en el
   
 */
 
-int buscaIgualIndiceDYV (const vector <int> v) {  // Versión en la que no puede haber   
-                                           // elementos repetidos
-    int izda = 0;
-    int dcha = v.size()-1;
-    int half = 0;
-
-
-    while (izda <= dcha){
-    	half = (izda+dcha)/2;
-    	if (v[half] > half) dcha = half-1;
-    	else if (v[half] < half) izda = half+1;
-    	else return half;
-    }
-	
-    return -1;      
+/*int buscaIgualIndiceDYV (vector<int> v, int l, int r) {  // Versión en la que no puede haber elementos repetidos
+        
+       if (l - r == 0){
+       	if (v[l] == l) return l;
+       	else return -1;
+       }
+       else if (v[l] == l) return l;
+       else if (v[r] == r) return r;
+       else{
+       	int half = (l+r)/2;
+       	if (v[half] == half) return half;
+       	else{
+       		int i= buscaIgualIndiceDYV(v,l,half);
+       		int j= buscaIgualIndiceDYV(v,half+1,r);
+       		
+       		if (j == -1 && i != -1) return i;
+       		else if (i==-1 && j != -1) return j;
+       		else return i;
+       	}
+       } 
+       
 }
+*/
 
+int buscaIgualIndiceDYV_REP (int v[], int l, int r)
+{
+	if (l <= r){
+   
+	   if (l - r == 0){
+	       if (v[l] == l) return l;
+	       else return -1;
+	   }
+	   else if (v[l] == l) return l;
+	   else if (v[r] == r) return r;
+	   else{
+		 int half = (l+r)/2;
+		 if (v[half] == half) return half;
+		 else{
+		      l++;
+		      r--;
+		      	int i= buscaIgualIndiceDYV_REP(v,l,half-1);
+		      	if(i < 0){
+		 	return buscaIgualIndiceDYV_REP(v,half+1,r);
+		 	}else{
+		 	return i;
+		 	}
+		 }
+	   }
+       }
+       
+       else return -1;
+} 
 
 // Programa principal
 
@@ -59,11 +94,12 @@ int main(int argc, char * argv[])
 	
 /*
    int n = atoi(argv[1]);
-   vector <int> v = {-2,-1,0,1,2,3,4,6,8};
+   vector <int> v = {-1,0,2,2,5,6,7};
    int l = 0;
-   int r = 8;
-  */
-  
+   int r = 6;
+*/
+
+
 	int n = atoi(argv[1]);
 	double time_total = 0;
 
@@ -78,7 +114,7 @@ int main(int argc, char * argv[])
 	int * aux = new int[m];
 	assert(aux);
 		
-   	//genero todos los enteros entre -(n-1) y n-1
+   	/*//genero todos los enteros entre -(n-1) y n-1
 	for (int j=0; j<m; j++) aux[j]=j-(n-1);
 
 	//algoritmo de random shuffling the Knuth (permutaci�n aleatoria) 
@@ -88,9 +124,10 @@ int main(int argc, char * argv[])
 	   int tmp=aux[j];
 	   aux[j]=aux[k];
 	   aux[k]=tmp;
-	}
+	}*/
 	//me quedo con los n primeros del vector
-	for (int j=0; j<n; j++) T[j]=aux[j];
+	
+	for (int j=0; j<n; j++) T[j]=rand()%(2*n-1)-n+1;
 	//for (int j=0; j<n; j++) cout << T[j] << " ";
 
 	//Y ahora ordeno el vector T
@@ -103,18 +140,21 @@ int main(int argc, char * argv[])
 	
 
 	//for (it=myvector.begin(); it!=myvector.end(); ++it)
-	  //cout << " " << *it;
-
+	 // cout << " " << *it;
+	
+	
 	high_resolution_clock::time_point tantes, tdepues;
 	duration<double> transcurrido;
 
-	int indice_buscado; 
+	int indice_buscado,l,r;
+	l=0;
+	r=n-1; 
 	
 
 	// Aplicamos la función buscaIgualIndice y medimos tiempos
 	tantes = high_resolution_clock::now();
 	
-	indice_buscado = buscaIgualIndiceDYV(myvector);
+	indice_buscado = buscaIgualIndiceDYV_REP(T,l,r);
 
 	tdepues = high_resolution_clock::now();
 
@@ -129,10 +169,10 @@ int main(int argc, char * argv[])
 	
 	/*cout << endl;
 	if ((indice_buscado == -1)) cout << "Elemento no encontrado" << endl;
-	else cout << "Indice: " << indice_buscado << " elemento:"<< myvector[indice_buscado]<< endl;
+	else cout << "Indice: " << indice_buscado << " elemento:"<< v[indice_buscado]<< endl;
 	*/
 	
-        cout << n << " " << time_total << endl;
+       cout << n << " " << time_total << endl;
 
 	
 return 0;
